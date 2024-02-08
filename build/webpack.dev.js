@@ -2,7 +2,7 @@ const { merge } = require('webpack-merge')
 const path = require('path')
 const open = require('opn') // 打开浏览器
 const chalk = require('chalk') // 改变命令行中输出日志颜色插件
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
+const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin')
 const common = require('./webpack.base.js')
 
 module.exports = merge(common, {

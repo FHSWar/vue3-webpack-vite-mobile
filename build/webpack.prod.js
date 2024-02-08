@@ -5,9 +5,6 @@ const common = require('./webpack.base.js')
 // 压缩CSS插件
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
-// 压缩CSS和JS代码
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin
@@ -49,18 +46,6 @@ module.exports = merge(common, {
     },
     minimize: false, // 是否压缩
     minimizer: [
-      new UglifyJsPlugin({
-        uglifyOptions: {
-          warnings: false,
-          compress: {
-            drop_debugger: true,
-            // drop_console: true,
-          },
-        },
-        cache: true, // 开启缓存
-        parallel: true, // 允许并发
-        sourceMap: true, // set to true if you want JS source maps
-      }),
       new CssMinimizerPlugin(),
     ],
   },
