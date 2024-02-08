@@ -10,11 +10,9 @@
     "vite": "vite",
     "vite:build": "vite build",
     "vite:preview": "vite preview",
-    "commit": "node commit/git-commit.js",
     "check-types": "tsc --watch",
     "build": "webpack --config build/webpack.prod.js",
-    "publish": "npm run build && node commit/publish.js",
-    "lintcss": "stylelint --fix \"src/**/*.less\" --syntax less",
+    "lintcss": "stylelint --fix \"src/**/*.less\"",
     "commitlint": "commitlint -e"
   },
   "lint-staged": {
@@ -36,10 +34,14 @@
   ],
   "author": "suporka",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/zxpsuper/createVue/issues"
+  "dependencies": {
+    "axios": "^1.6.7",
+    "core-js": "^3.35.1",
+    "es6-promise": "^4.2.8",
+    "vue": "^3.4.15",
+    "vue-router": "^4.2.5",
+    "vuex": "^4.1.0"
   },
-  "homepage": "https://github.com/zxpsuper/createVue#readme",
   "devDependencies": {
     "@babel/cli": "^7.23.9",
     "@babel/core": "^7.23.9",
@@ -48,12 +50,14 @@
     "@babel/plugin-transform-runtime": "^7.23.9",
     "@babel/preset-env": "^7.23.9",
     "@babel/preset-typescript": "^7.23.3",
+    "@babel/runtime": "^7.23.9",
+    "@babel/runtime-corejs3": "^7.23.9",
     "@soda/friendly-errors-webpack-plugin": "^1.8.1",
     "@types/node": "^20.11.16",
     "@types/webpack-env": "^1.18.4",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
-    "@vitejs/plugin-vue": "^2.3.4",
+    "@vitejs/plugin-vue": "^5.0.3",
     "@vue/compiler-sfc": "^3.0.11",
     "autoprefixer": "^10.4.17",
     "babel-eslint": "^10.1.0",
@@ -63,7 +67,7 @@
     "css-minimizer-webpack-plugin": "^6.0.0",
     "css-properties-sorting": "^1.0.10",
     "dayjs": "^1.11.10",
-    "eslint": "^7.32.0",
+    "eslint": "^8.56.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
@@ -93,6 +97,7 @@
     "typescript": "^5.3.3",
     "uniq": "^1.0.1",
     "url-loader": "^4.1.1",
+    "vite": "^5.0.12",
     "vue-loader": "^17.4.2",
     "webpack": "^5.90.1",
     "webpack-bundle-analyzer": "^4.10.1",
@@ -100,17 +105,5 @@
     "webpack-dev-server": "^4.15.1",
     "webpack-merge": "^5.10.0",
     "workbox-webpack-plugin": "^7.0.0"
-  },
-  "dependencies": {
-    "@babel/runtime": "^7.23.9",
-    "@babel/runtime-corejs3": "^7.23.9",
-    "@vitejs/plugin-vue": "^2.3.4",
-    "axios": "^1.6.7",
-    "core-js": "^3.35.1",
-    "es6-promise": "^4.2.8",
-    "vite": "^2.9.17",
-    "vue": "^3.0.11",
-    "vue-router": "^4.2.5",
-    "vuex": "^4.1.0"
   }
 }
