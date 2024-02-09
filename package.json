@@ -5,12 +5,12 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "precommit": "lint-staged",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "anls": "ANALYZE=true webpack --config build/webpack.prod.cjs",
     "dev": "vite",
     "dev:webpack": "webpack serve --progress --hot --config build/webpack.dev.cjs",
     "build": "webpack --config build/webpack.prod.cjs",
     "build:vite": "vue-tsc --noEmit && vite build",
+    "precommit": "lint-staged",
     "preview": "vite preview"
   },
   "lint-staged": {
