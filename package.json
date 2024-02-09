@@ -7,8 +7,8 @@
   "scripts": {
     "anls": "ANALYZE=true webpack --config build/webpack.prod.cjs",
     "dev": "vite",
-    "dev:webpack": "webpack serve --progress --hot --config build/webpack.dev.cjs",
-    "build": "webpack --config build/webpack.prod.cjs",
+    "dev:webpack": "NODE_ENV=development webpack serve --progress --hot --config build/webpack.dev.cjs",
+    "build": "NODE_ENV=production webpack --config build/webpack.prod.cjs",
     "build:vite": "vue-tsc --noEmit && vite build",
     "precommit": "lint-staged",
     "preview": "vite preview"
@@ -88,6 +88,7 @@
     "stylelint": "^16.2.1",
     "stylelint-config-standard": "^36.0.0",
     "stylelint-order": "^6.0.4",
+    "terser-webpack-plugin": "^5.3.10",
     "ts-loader": "^9.5.1",
     "typescript": "^5.3.3",
     "uniq": "^1.0.1",

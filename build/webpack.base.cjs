@@ -4,12 +4,45 @@ const { resolve } = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const dayjs = require('dayjs')
 const HtmlWebpackPlugin = require('html-webpack-plugin') // html插件
+const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 压缩CSS插件
 const { VueLoaderPlugin } = require('vue-loader/dist/index') // vue-loader 插件, 需配合 @vue/compiler-sfc 一块使用
-const webpack = require('webpack')
+const { DefinePlugin } = require('webpack')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
+// 用IIFE制作一个缓存函数
+const isProd = (() => {
+  let cache
+  return () => {
+    if (cache !== undefined) {
+      return cache // 如果已经计算过，直接返回之前的计算结果
+    }
+    cache = process.env.NODE_ENV === 'production' // 计算一次并缓存结果
+    return cache
+  }
+})()
+
+const getMode = () => (isProd() ? 'production' : 'development')
+const getStyleLoader = () =>
+  isProd() ? MiniCssExtractPlugin.loader : 'style-loader'
+
+const modifyOutput = () => {
+  const prodConf = {
+    environment: {
+      arrowFunction: false,
+      destructuring: false
+    },
+    clean: true
+  }
+  return isProd() ? prodConf : {}
+}
+
 module.exports = {
+  mode: getMode(),
   entry: ['./src/index.ts'],
+  output: {
+    filename: 'js/[name].[contenthash].js',
+    ...modifyOutput()
+  },
   target: 'web',
   module: {
     rules: [
@@ -17,16 +50,6 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader'
-      },
-      // 处理字体
-      {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        type: 'asset',
-        parser: {
-          dataUrlCondition: {
-            maxSize: 8 * 1024
-          }
-        }
       },
       {
         test: /\.(t|j)sx?$/,
@@ -49,15 +72,32 @@ module.exports = {
             loader: 'babel-loader'
           }
         ]
+      },
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          getStyleLoader(),
+          'css-loader',
+          // 'postcss-loader',
+          'sass-loader'
+        ]
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        type: 'asset',
+        parser: {
+          dataUrlCondition: {
+            maxSize: 8 * 1024
+          }
+        }
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        type: 'asset/resource'
       }
     ]
   },
   plugins: [
-    // 请确保引入这个插件来施展魔法
-    new VueLoaderPlugin(),
-    new HtmlWebpackPlugin({
-      template: resolve(__dirname, './index.ejs')
-    }),
     // 处理静态文件夹 public 复制到打包的 public 文件夹
     new CopyWebpackPlugin({
       patterns: [
@@ -68,7 +108,7 @@ module.exports = {
       ]
     }),
     // 指定环境,定义环境变量，项目中暂时未用到
-    new webpack.DefinePlugin({
+    new DefinePlugin({
       'process.env': {
         VUE_BASE_URL: JSON.stringify('http://localhost:9000'),
         BUILD_TIME: JSON.stringify(dayjs().format('YYYY/DD/MM HH:mm:ss'))
@@ -77,7 +117,11 @@ module.exports = {
       __VUE_PROD_DEVTOOLS__: JSON.stringify(false),
       __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: JSON.stringify(true)
     }),
-    new ForkTsCheckerWebpackPlugin() // 创建一个新进程用于Typescript类型检查
+    new HtmlWebpackPlugin({
+      template: resolve(__dirname, './index.ejs')
+    }),
+    new ForkTsCheckerWebpackPlugin(), // 创建一个新进程用于Typescript类型检查
+    new VueLoaderPlugin()
   ],
   resolve: {
     extensions: ['.js', '.cjs', '.vue', '.ts', '.tsx'],

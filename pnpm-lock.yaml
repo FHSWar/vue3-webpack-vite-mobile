@@ -166,6 +166,9 @@ devDependencies:
   stylelint-order:
     specifier: ^6.0.4
     version: 6.0.4(stylelint@16.2.1)
+  terser-webpack-plugin:
+    specifier: ^5.3.10
+    version: 5.3.10(webpack@5.90.1)
   ts-loader:
     specifier: ^9.5.1
     version: 9.5.1(typescript@5.3.3)(webpack@5.90.1)
