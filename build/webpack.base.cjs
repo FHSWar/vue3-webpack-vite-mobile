@@ -4,7 +4,7 @@ const { resolve } = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const dayjs = require('dayjs')
 const HtmlWebpackPlugin = require('html-webpack-plugin') // html插件
-const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 压缩CSS插件
+const { loader: extractLoader } = require('mini-css-extract-plugin') // 压缩CSS插件
 const { VueLoaderPlugin } = require('vue-loader/dist/index') // vue-loader 插件, 需配合 @vue/compiler-sfc 一块使用
 const { DefinePlugin } = require('webpack')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
@@ -20,11 +20,8 @@ const isProd = (() => {
     return cache
   }
 })()
-
 const getMode = () => (isProd() ? 'production' : 'development')
-const getStyleLoader = () =>
-  isProd() ? MiniCssExtractPlugin.loader : 'style-loader'
-
+const getStyleLoader = () => (isProd() ? extractLoader : 'style-loader')
 const modifyOutput = () => {
   const prodConf = {
     environment: {
