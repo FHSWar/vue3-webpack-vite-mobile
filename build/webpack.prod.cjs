@@ -1,13 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable import/no-extraneous-dependencies */
 const path = require('path')
-// 合并配置文件
-const { merge } = require('webpack-merge')
-// 压缩CSS插件
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
-
+const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 压缩CSS插件
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+const { merge } = require('webpack-merge') // 合并配置文件
 const common = require('./webpack.base.cjs')
 
 const plugins = [
@@ -62,23 +59,6 @@ module.exports = merge(common, {
           'css-loader',
           'postcss-loader',
           'sass-loader'
-        ]
-      },
-      {
-        test: /\.less$/,
-        use: [
-          {
-            // 存在问题，less文件压缩不成功？
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              // you can specify a publicPath here
-              // by default it use publicPath in webpackOptions.output
-              publicPath: '../'
-            }
-          },
-          'css-loader',
-          'postcss-loader',
-          'less-loader'
         ]
       },
       {

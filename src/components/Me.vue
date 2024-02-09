@@ -27,7 +27,7 @@ export default defineComponent({
   }
 })
 </script>
-<style scoped lang="less">
+<style scoped>
 a {
   color: #42b983;
 }

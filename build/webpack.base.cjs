@@ -1,14 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable import/no-extraneous-dependencies */
-const webpack = require('webpack')
-const path = require('path')
-// vue-loader 插件, 需配合 @vue/compiler-sfc 一块使用
-const { VueLoaderPlugin } = require('vue-loader/dist/index')
-// html插件
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { resolve } = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const dayjs = require('dayjs')
+const HtmlWebpackPlugin = require('html-webpack-plugin') // html插件
+const { VueLoaderPlugin } = require('vue-loader/dist/index') // vue-loader 插件, 需配合 @vue/compiler-sfc 一块使用
+const webpack = require('webpack')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
 module.exports = {
@@ -59,13 +56,13 @@ module.exports = {
     // 请确保引入这个插件来施展魔法
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, './index.ejs')
+      template: resolve(__dirname, './index.ejs')
     }),
     // 处理静态文件夹 static 复制到打包的 static 文件夹
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, '../static'),
+          from: resolve(__dirname, '../static'),
           to: 'static'
         }
       ]
@@ -80,8 +77,7 @@ module.exports = {
       __VUE_PROD_DEVTOOLS__: JSON.stringify(false),
       __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: JSON.stringify(true)
     }),
-    // fork-ts-checker-webpack-plugin，顾名思义就是创建一个新进程，专门来运行Typescript类型检查。这么做的原因是为了利用多核资源来提升编译的速度
-    new ForkTsCheckerWebpackPlugin()
+    new ForkTsCheckerWebpackPlugin() // 创建一个新进程用于Typescript类型检查
   ],
   resolve: {
     extensions: ['.js', '.cjs', '.vue', '.ts', '.tsx'],

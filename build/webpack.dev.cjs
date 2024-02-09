@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable import/no-extraneous-dependencies */
-const { merge } = require('webpack-merge')
 const path = require('path')
 const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin')
+const { merge } = require('webpack-merge')
 const common = require('./webpack.base.cjs')
 
 module.exports = merge(common, {
@@ -29,15 +29,6 @@ module.exports = merge(common, {
           'css-loader',
           // 'postcss-loader',
           'sass-loader'
-        ]
-      },
-      {
-        test: /\.less$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          // 'postcss-loader',
-          'less-loader'
         ]
       },
       {
