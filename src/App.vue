@@ -43,7 +43,7 @@ export default defineComponent({
       store.dispatch('countUp')
     }, 1000)
 
-    axios.get<ResData>('../static/head.json', {}).then((res) => {
+    axios.get<ResData>('../public/head.json', {}).then((res) => {
       console.log(res)
     })
     return { ...toRefs(data) }

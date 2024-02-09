@@ -9,7 +9,7 @@ export default defineConfig({
     minify: 'terser'
   },
   plugins: [vue()],
-  publicDir: './static',
+  publicDir: './public',
   define: {
     'process.env': {
       __VUE_OPTIONS_API__: true,

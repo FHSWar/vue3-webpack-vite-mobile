@@ -58,12 +58,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: resolve(__dirname, './index.ejs')
     }),
-    // 处理静态文件夹 static 复制到打包的 static 文件夹
+    // 处理静态文件夹 public 复制到打包的 public 文件夹
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: resolve(__dirname, '../static'),
-          to: 'static'
+          from: resolve(__dirname, '../public'),
+          to: 'public'
         }
       ]
     }),
