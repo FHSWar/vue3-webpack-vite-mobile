@@ -1,32 +1,31 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable import/no-extraneous-dependencies */
 const path = require('path')
 // 合并配置文件
 const { merge } = require('webpack-merge')
-const common = require('./webpack.base.js')
 // 压缩CSS插件
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+const common = require('./webpack.base.cjs')
 
-var plugins = [
+const plugins = [
   new MiniCssExtractPlugin({
-    // Options similar to the same options in webpackOptions.output
-    // both options are optional
     filename: 'css/[name].[contenthash].css',
-    chunkFilename: 'css/[name].[contenthash].css',
+    chunkFilename: 'css/[name].[contenthash].css'
   }),
-  /* new BundleAnalyzerPlugin({
-        analyzerMode: 'server',
-        analyzerHost: '127.0.0.1',
-        analyzerPort: 8888,
-        reportFilename: 'report.html',
-        defaultSizes: 'parsed',
-        generateStatsFile: false,
-        statsFilename: 'stats.json',
-        statsOptions: null,
-        logLevel: 'info',
-    }) */
+  new BundleAnalyzerPlugin({
+    analyzerMode: 'server',
+    analyzerHost: '127.0.0.1',
+    analyzerPort: 8888,
+    reportFilename: 'report.html',
+    defaultSizes: 'parsed',
+    generateStatsFile: false,
+    statsFilename: 'stats.json',
+    statsOptions: null,
+    logLevel: 'info'
+  })
 ]
 
 module.exports = merge(common, {
@@ -40,14 +39,12 @@ module.exports = merge(common, {
           name: 'vendor',
           test: /[\\/]node_modules[\\/]/,
           priority: 10,
-          chunks: 'initial', // 只打包初始时依赖的第三方
-        },
-      },
+          chunks: 'initial' // 只打包初始时依赖的第三方
+        }
+      }
     },
     minimize: false, // 是否压缩
-    minimizer: [
-      new CssMinimizerPlugin(),
-    ],
+    minimizer: [new CssMinimizerPlugin()]
   },
   module: {
     rules: [
@@ -59,13 +56,13 @@ module.exports = merge(common, {
             options: {
               // you can specify a publicPath here
               // by default it use publicPath in webpackOptions.output
-              publicPath: '../',
-            },
+              publicPath: '../'
+            }
           },
           'css-loader',
           'postcss-loader',
-          'sass-loader',
-        ],
+          'sass-loader'
+        ]
       },
       {
         test: /\.less$/,
@@ -76,29 +73,29 @@ module.exports = merge(common, {
             options: {
               // you can specify a publicPath here
               // by default it use publicPath in webpackOptions.output
-              publicPath: '../',
-            },
+              publicPath: '../'
+            }
           },
           'css-loader',
           'postcss-loader',
-          'less-loader',
-        ],
+          'less-loader'
+        ]
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
-        type: 'asset',
-      },
-    ],
+        type: 'asset'
+      }
+    ]
   },
-  plugins: plugins,
+  plugins,
   mode: 'production',
   output: {
     filename: 'js/[name].[contenthash].js',
     path: path.resolve(__dirname, '../dist'),
     environment: {
       arrowFunction: false,
-      destructuring: false,
+      destructuring: false
     },
-    clean: true,
-  },
+    clean: true
+  }
 })

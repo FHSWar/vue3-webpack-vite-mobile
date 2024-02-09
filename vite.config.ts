@@ -1,20 +1,28 @@
-import vue from '@vitejs/plugin-vue'
+/* eslint-disable import/no-extraneous-dependencies */
 import { resolve } from 'path'
+
+import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
+  build: {
+    minify: 'terser'
+  },
   plugins: [vue()],
   publicDir: './static',
   define: {
     'process.env': {
-      VUE_BASE_URL: '/',
+      __VUE_OPTIONS_API__: true,
+      __VUE_PROD_DEVTOOLS__: false,
+      __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: true,
       BUILD_TIME: new Date().toLocaleString(),
-    },
+      VUE_BASE_URL: '/'
+    }
   },
   resolve: {
-    extensions: ['.vue', '.mjs', '.js', '.ts', '.jsx', '.tsx', '.json'],
+    extensions: ['.vue', '.mjs', '.js', '.cjs', '.ts', '.jsx', '.tsx', '.json'],
     alias: {
-      '@': resolve('src'),
-    },
-  },
+      '@': resolve('src')
+    }
+  }
 })

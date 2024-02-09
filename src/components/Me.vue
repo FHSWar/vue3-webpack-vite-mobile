@@ -24,7 +24,7 @@ export default defineComponent({
     const store = useStore()
     const count = computed(() => store.state.count)
     return { count }
-  },
+  }
 })
 </script>
 <style scoped lang="less">

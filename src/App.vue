@@ -1,11 +1,5 @@
 <template>
   <div id="app">
-    <a
-      class="github-fork-ribbon right-top"
-      href="https://github.com/zxpsuper/createVue"
-      title="Fork me on GitHub"
-      >Fork me on GitHub</a
-    >
     <img
       v-if="show"
       src="./assets/logo.png"
@@ -27,7 +21,7 @@ import axios from '@/apis/index'
 
 interface ResData {
   user: {
-    name: String
+    name: string
     child: {
       name: string
     }[]
@@ -37,7 +31,7 @@ export default defineComponent({
   setup() {
     const store = useStore()
     const data = reactive({
-      show: true,
+      show: true
     })
     if (process.env) {
       console.log(
@@ -53,7 +47,7 @@ export default defineComponent({
       console.log(res)
     })
     return { ...toRefs(data) }
-  },
+  }
 })
 </script>
 
@@ -108,20 +102,6 @@ img {
 
 .router a:hover {
   color: #00aac5;
-}
-
-.github-fork-ribbon {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 9999;
-  width: 12.1em;
-  height: 12.1em;
-  overflow: hidden;
-  font-size: 13px;
-  text-decoration: none;
-  pointer-events: none;
-  text-indent: -999999px;
 }
 
 .github-fork-ribbon.fixed {
@@ -184,7 +164,11 @@ img {
 
   /* Set the text properties */
   color: #fff;
-  font: 700 1em 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font:
+    700 1em 'Helvetica Neue',
+    Helvetica,
+    Arial,
+    sans-serif;
   text-align: center;
   text-decoration: none;
   text-shadow: 0 -0.08em rgba(0, 0, 0, 0.5);

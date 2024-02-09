@@ -27,8 +27,8 @@ export default defineComponent({
   props: {
     msg: {
       type: String,
-      default: 'Welcome to suporka vue',
-    },
+      default: 'Welcome to suporka vue'
+    }
   },
   setup() {
     const store = useStore()
@@ -37,10 +37,10 @@ export default defineComponent({
       val: 0,
       ifShowMask: false,
       suporka: 1,
-      testArray: Array.from([]),
+      testArray: Array.from([])
     })
     return { ...toRefs(data), count }
-  },
+  }
 })
 </script>
 

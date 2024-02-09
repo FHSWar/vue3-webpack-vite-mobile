@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable import/no-extraneous-dependencies */
 const webpack = require('webpack')
 const path = require('path')
 // vue-loader 插件, 需配合 @vue/compiler-sfc 一块使用
@@ -17,7 +19,7 @@ module.exports = {
       // 处理vue
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
+        loader: 'vue-loader'
       },
       // 处理字体
       {
@@ -25,67 +27,66 @@ module.exports = {
         type: 'asset',
         parser: {
           dataUrlCondition: {
-            maxSize: 8 * 1024,
-          },
-        },
+            maxSize: 8 * 1024
+          }
+        }
       },
-      /* {
-        test: /\.(t|j)s$/,
+      {
+        test: /\.(t|j)sx?$/,
         exclude: /node_modules/,
         use: [
           {
             loader: 'ts-loader',
             options: {
-              // 指定特定的ts编译配置，为了区分脚本的ts配置
-              configFile: path.resolve(__dirname, '../tsconfig.json'),
               // 对应文件添加个.ts或.tsx后缀
-              appendTsSuffixTo: [/\.vue$/],
-              transpileOnly: true, // 关闭类型检查，即只进行转译
-            },
-          },
-        ],
-      }, */
+              appendTsSuffixTo: [/\.vue$/]
+            }
+          }
+        ]
+      },
       {
         test: /\.(t|j)s$/,
         exclude: /node_modules/,
         use: [
           {
-            loader: 'babel-loader',
-          },
-        ],
-      },
-    ],
+            loader: 'babel-loader'
+          }
+        ]
+      }
+    ]
   },
   plugins: [
     // 请确保引入这个插件来施展魔法
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, '../index.html'),
+      template: path.resolve(__dirname, './index.ejs')
     }),
     // 处理静态文件夹 static 复制到打包的 static 文件夹
     new CopyWebpackPlugin({
       patterns: [
         {
           from: path.resolve(__dirname, '../static'),
-          to: 'static',
-        },
-      ],
+          to: 'static'
+        }
+      ]
     }),
     // 指定环境,定义环境变量，项目中暂时未用到
     new webpack.DefinePlugin({
       'process.env': {
         VUE_BASE_URL: JSON.stringify('http://localhost:9000'),
-        BUILD_TIME: JSON.stringify(dayjs().format('YYYY/DD/MM HH:mm:ss')),
-        __VUE_PROD_DEVTOOLS__: 'false',
+        BUILD_TIME: JSON.stringify(dayjs().format('YYYY/DD/MM HH:mm:ss'))
       },
+      __VUE_OPTIONS_API__: JSON.stringify(true),
+      __VUE_PROD_DEVTOOLS__: JSON.stringify(false),
+      __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: JSON.stringify(true)
     }),
     // fork-ts-checker-webpack-plugin，顾名思义就是创建一个新进程，专门来运行Typescript类型检查。这么做的原因是为了利用多核资源来提升编译的速度
-    new ForkTsCheckerWebpackPlugin(),
+    new ForkTsCheckerWebpackPlugin()
   ],
   resolve: {
-    extensions: ['.js', '.vue', '.ts', '.tsx'],
+    extensions: ['.js', '.cjs', '.vue', '.ts', '.tsx'],
     alias: {
-      '@': resolve('src'),
-    },
-  },
+      '@': resolve('src')
+    }
+  }
 }
