@@ -43,5 +43,11 @@ module.exports = merge(common, {
     },
     minimizer: [new CssMinimizerPlugin(), new TerserWebpackPlugin()]
   },
+  // externals: {
+  //   axios: 'Axios',
+  //   vue: 'Vue',
+  //   pinia: 'Pinia',
+  //   'vue-router': 'VueRouter'
+  // },
   plugins
 })

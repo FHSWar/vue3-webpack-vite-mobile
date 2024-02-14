@@ -2,11 +2,11 @@ module.exports = {
   presets: [
     [
       '@babel/preset-env'
-      /* 按需垫片仍然导致构建体积大增，所以暂时关闭
+      /* // 按需垫片仍然导致构建体积大增，所以暂时关闭
       {
         useBuiltIns: 'usage', // 按需引入 polyfill
-        corejs: 3,
-      }, */
+        corejs: 3
+      } */
     ],
     [
       '@babel/preset-typescript', // 引用Typescript插件

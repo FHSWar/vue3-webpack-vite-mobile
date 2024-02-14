@@ -1,3 +1,5 @@
+require('@rushstack/eslint-patch/modern-module-resolution')
+
 module.exports = {
   env: {
     node: true,
@@ -9,8 +11,11 @@ module.exports = {
   extends: [
     'plugin:@typescript-eslint/recommended',
     'airbnb-base',
+    'plugin:vue-scoped-css/recommended',
     'plugin:vue/vue3-recommended',
-    'plugin:prettier/recommended'
+    '@vue/eslint-config-typescript/recommended',
+    'plugin:prettier/recommended',
+    'plugin:tailwindcss/recommended'
   ],
   globals: {
     Atomics: 'readonly',
@@ -26,6 +31,7 @@ module.exports = {
   },
   plugins: ['vue', '@typescript-eslint'],
   rules: {
+    '@typescript-eslint/no-explicit-any': 'warn',
     'no-console': 'off',
     'import/no-unresolved': 'off',
     'import/extensions': 'off',

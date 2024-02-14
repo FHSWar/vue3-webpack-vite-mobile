@@ -1,4 +1,3 @@
-import 'es6-promise/auto'
 import { createStore } from 'vuex'
 
 export default createStore({

@@ -5,8 +5,8 @@ export default {
     if (!config) {
       config = {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
       }
     }
     return axios.post<T>(url, data, config).then((res) => {
@@ -17,5 +17,5 @@ export default {
     return axios.get<T>(url, { params: data }).then((res) => {
       return Promise.resolve(res.data)
     })
-  },
+  }
 }

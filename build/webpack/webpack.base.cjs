@@ -100,9 +100,9 @@ module.exports = {
         VUE_BASE_URL: JSON.stringify('http://localhost:9000'),
         BUILD_TIME: JSON.stringify(dayjs().format('YYYY/DD/MM HH:mm:ss'))
       },
-      __VUE_OPTIONS_API__: JSON.stringify(true),
+      __VUE_OPTIONS_API__: JSON.stringify(false),
       __VUE_PROD_DEVTOOLS__: JSON.stringify(false),
-      __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: JSON.stringify(true)
+      __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: JSON.stringify(false)
     }),
     new ForkTsCheckerWebpackPlugin(), // 创建一个新进程用于Typescript类型检查
     new VueLoaderPlugin()
