@@ -4,7 +4,7 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     count: 0,
-    suporka: 'suporka',
+    suporka: 'suporka'
   },
   mutations: {
     increment(state) {
@@ -12,7 +12,7 @@ export default createStore({
     },
     decrement(state) {
       state.count--
-    },
+    }
   },
   actions: {
     countUp(ctx) {
@@ -20,7 +20,7 @@ export default createStore({
     },
     countDown(ctx) {
       ctx.commit('decrement')
-    },
+    }
   },
-  modules: {},
+  modules: {}
 })

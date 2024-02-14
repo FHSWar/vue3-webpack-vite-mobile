@@ -31,5 +31,29 @@ module.exports = {
     'import/extensions': 'off',
     'no-plusplus': 'off',
     'no-param-reassign': 'off'
-  }
+  },
+  overrides: [
+    // webpack配置文件遵循commonjs规范,所以关闭禁止require规则
+    {
+      files: ['*.cjs'],
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off'
+      }
+    },
+    // 有些依赖不体现在打包产物中，但需要import，所以关闭import规则
+    {
+      files: ['*.cjs', 'vite.config.ts'],
+      rules: {
+        'import/no-extraneous-dependencies': 'off'
+      }
+    },
+    // .d.ts是自动生成的，不做校验
+    {
+      files: ['*.d.ts'],
+      rules: {
+        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/ban-types': 'off'
+      }
+    }
+  ]
 }

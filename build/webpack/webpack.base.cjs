@@ -1,13 +1,11 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable import/no-extraneous-dependencies */
 const { resolve } = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const dayjs = require('dayjs')
-const HtmlWebpackPlugin = require('html-webpack-plugin') // html插件
-const { loader: extractLoader } = require('mini-css-extract-plugin') // 压缩CSS插件
+const { loader: extractCssLoader } = require('mini-css-extract-plugin') // 压缩CSS插件
 const { VueLoaderPlugin } = require('vue-loader/dist/index') // vue-loader 插件, 需配合 @vue/compiler-sfc 一块使用
 const { DefinePlugin } = require('webpack')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const { entry, htmlPlugins } = require('./pages.cjs')
 
 // 用IIFE制作一个缓存函数
 const isProd = (() => {
@@ -21,7 +19,7 @@ const isProd = (() => {
   }
 })()
 const getMode = () => (isProd() ? 'production' : 'development')
-const getStyleLoader = () => (isProd() ? extractLoader : 'style-loader')
+const getStyleLoader = () => (isProd() ? extractCssLoader : 'style-loader')
 const modifyOutput = () => {
   const prodConf = {
     environment: {
@@ -35,7 +33,7 @@ const modifyOutput = () => {
 
 module.exports = {
   mode: getMode(),
-  entry: ['./src/index.ts'],
+  entry,
   output: {
     filename: 'js/[name].[contenthash].js',
     ...modifyOutput()
@@ -95,11 +93,13 @@ module.exports = {
     ]
   },
   plugins: [
+    // HtmlWebpackPlugin实例们
+    ...htmlPlugins,
     // 处理静态文件夹 public 复制到打包的 public 文件夹
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: resolve(__dirname, '../public'),
+          from: resolve(__dirname, '../../public'),
           to: 'public'
         }
       ]
@@ -113,9 +113,6 @@ module.exports = {
       __VUE_OPTIONS_API__: JSON.stringify(true),
       __VUE_PROD_DEVTOOLS__: JSON.stringify(false),
       __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: JSON.stringify(true)
-    }),
-    new HtmlWebpackPlugin({
-      template: resolve(__dirname, './index.ejs')
     }),
     new ForkTsCheckerWebpackPlugin(), // 创建一个新进程用于Typescript类型检查
     new VueLoaderPlugin()
