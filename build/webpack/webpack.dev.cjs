@@ -11,7 +11,7 @@ module.exports = merge(common, {
   devServer: {
     port: 5173,
     static: {
-      directory: resolve(__dirname, '../public'),
+      directory: resolve(process.cwd(), 'public'),
       watch: true
     },
     host: '0.0.0.0',

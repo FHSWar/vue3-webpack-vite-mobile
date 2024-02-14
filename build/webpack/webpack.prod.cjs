@@ -1,3 +1,5 @@
+const { resolve } = require('path')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 压缩CSS插件
 const TerserWebpackPlugin = require('terser-webpack-plugin')
@@ -6,6 +8,15 @@ const { merge } = require('webpack-merge') // 合并配置文件
 const common = require('./webpack.base.cjs')
 
 const plugins = [
+  // 处理静态文件夹 public 复制到打包的根目录下
+  new CopyWebpackPlugin({
+    patterns: [
+      {
+        from: resolve(process.cwd(), 'public'),
+        to: resolve(process.cwd(), 'dist')
+      }
+    ]
+  }),
   new MiniCssExtractPlugin({
     filename: 'css/[name].[contenthash].css',
     chunkFilename: 'css/[name].[contenthash].css'

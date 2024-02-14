@@ -17,7 +17,7 @@ function getTemplatePath(templatePath) {
     }
   }
 
-  return resolve(__dirname, '../index.ejs')
+  return resolve(process.cwd(), 'build/index.ejs')
 }
 
 // 生成HtmlWebpackPlugin实例
@@ -31,9 +31,13 @@ function generateHtmlPlugins(modulesDir) {
       if (stat.isDirectory()) {
         // 当目录存在时，返回一个HtmlWebpackPlugin实例
         return new HtmlWebpackPlugin({
+          chunks: [dir],
           filename: `${dir}.html`,
           template: getTemplatePath(itemPath),
-          chunks: [dir]
+          templateParameters: {
+            // 传递给模板的参数
+            VITE_ENTRY_SCRIPT: null
+          }
         })
       }
       return null
@@ -61,7 +65,7 @@ function generateEntryPoints(modulesDir) {
 
 const generateHtmlPluginsConfig = () => {
   // 多页面应用的页面目录
-  const modulesDir = resolve(__dirname, '../../src/modules')
+  const modulesDir = resolve(process.cwd(), 'src/modules')
 
   const htmlPlugins = generateHtmlPlugins(modulesDir)
   const entry = generateEntryPoints(modulesDir)

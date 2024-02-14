@@ -42,7 +42,7 @@ module.exports = {
     },
     // 有些依赖不体现在打包产物中，但需要import，所以关闭import规则
     {
-      files: ['*.cjs', 'vite.config.ts'],
+      files: ['*.cjs', 'vite.config.ts', 'vite-plugin-mpa.ts'],
       rules: {
         'import/no-extraneous-dependencies': 'off'
       }

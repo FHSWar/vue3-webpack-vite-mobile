@@ -1,5 +1,4 @@
 const { resolve } = require('path')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const dayjs = require('dayjs')
 const { loader: extractCssLoader } = require('mini-css-extract-plugin') // 压缩CSS插件
 const { VueLoaderPlugin } = require('vue-loader/dist/index') // vue-loader 插件, 需配合 @vue/compiler-sfc 一块使用
@@ -95,15 +94,6 @@ module.exports = {
   plugins: [
     // HtmlWebpackPlugin实例们
     ...htmlPlugins,
-    // 处理静态文件夹 public 复制到打包的 public 文件夹
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: resolve(__dirname, '../../public'),
-          to: 'public'
-        }
-      ]
-    }),
     // 指定环境,定义环境变量，项目中暂时未用到
     new DefinePlugin({
       'process.env': {
