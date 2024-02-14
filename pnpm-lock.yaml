@@ -145,6 +145,9 @@ devDependencies:
   postcss-loader:
     specifier: ^8.1.0
     version: 8.1.0(postcss@8.4.35)(typescript@5.3.3)(webpack@5.90.1)
+  postcss-pxtorem:
+    specifier: ^6.1.0
+    version: 6.1.0(postcss@8.4.35)
   prettier:
     specifier: ^3.2.5
     version: 3.2.5
@@ -166,12 +169,21 @@ devDependencies:
   stylelint-config-recommended-vue:
     specifier: ^1.5.0
     version: 1.5.0(postcss-html@1.6.0)(stylelint@16.2.1)
+  stylelint-config-standard:
+    specifier: ^36.0.0
+    version: 36.0.0(stylelint@16.2.1)
   stylelint-config-standard-scss:
     specifier: ^13.0.0
     version: 13.0.0(postcss@8.4.35)(stylelint@16.2.1)
+  stylelint-config-tailwindcss:
+    specifier: ^0.0.7
+    version: 0.0.7(stylelint@16.2.1)(tailwindcss@3.4.1)
   stylelint-order:
     specifier: ^6.0.4
     version: 6.0.4(stylelint@16.2.1)
+  tailwindcss:
+    specifier: ^3.4.1
+    version: 3.4.1
   terser-webpack-plugin:
     specifier: ^5.3.10
     version: 5.3.10(webpack@5.90.1)
@@ -6521,6 +6533,14 @@ packages:
       postcss-value-parser: 4.2.0
     dev: true
 
+  /postcss-pxtorem@6.1.0(postcss@8.4.35):
+    resolution: {integrity: sha512-ROODSNci9ADal3zUcPHOF/K83TiCgNSPXQFSbwyPHNV8ioHIE4SaC+FPOufd8jsr5jV2uIz29v1Uqy1c4ov42g==}
+    peerDependencies:
+      postcss: ^8.0.0
+    dependencies:
+      postcss: 8.4.35
+    dev: true
+
   /postcss-reduce-initial@6.0.2(postcss@8.4.35):
     resolution: {integrity: sha512-YGKalhNlCLcjcLvjU5nF8FyeCTkCO5UtvJEt0hrPZVCTtRLSOH4z00T1UntQPj4dUmIYZgMj8qK77JbSX95hSw==}
     engines: {node: ^14 || ^16 || >=18.0}
@@ -7493,6 +7513,16 @@ packages:
     dependencies:
       stylelint: 16.2.1(typescript@5.3.3)
       stylelint-config-recommended: 14.0.0(stylelint@16.2.1)
+    dev: true
+
+  /stylelint-config-tailwindcss@0.0.7(stylelint@16.2.1)(tailwindcss@3.4.1):
+    resolution: {integrity: sha512-n2dCWH+0ppr0/by4EYCLWW7g5LU+l4UzUIsYS7xbVHqvm9UWa7UhltNdNiz5NmLF/FmbJR4Yd/v9DuUGvLw1Tg==}
+    peerDependencies:
+      stylelint: '>=13.13.1'
+      tailwindcss: '>=2.2.16'
+    dependencies:
+      stylelint: 16.2.1(typescript@5.3.3)
+      tailwindcss: 3.4.1
     dev: true
 
   /stylelint-order@6.0.4(stylelint@16.2.1):

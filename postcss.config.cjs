@@ -1,6 +1,10 @@
-/* eslint-disable global-require */
-/* eslint-disable import/no-extraneous-dependencies */
-// CSS后处理
 module.exports = {
-  plugins: [require('autoprefixer')]
+  plugins: {
+    autoprefixer: {},
+    'postcss-pxtorem': {
+      rootValue: 16,
+      propList: ['*']
+    },
+    tailwindcss: {}
+  }
 }

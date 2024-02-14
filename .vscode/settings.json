@@ -2,5 +2,17 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit"
   },
-  "git.ignoreLimitWarning": true
+  "editor.detectIndentation": false,
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": "meta.function-call",
+        "settings": {
+          "fontStyle": "bold"
+        }
+      }
+    ]
+  },
+  "eslint.validate": ["javascript", "typescript", "tsx", "vue"],
+  "stylelint.validate": ["css", "scss", "vue", "postcss"]
 }

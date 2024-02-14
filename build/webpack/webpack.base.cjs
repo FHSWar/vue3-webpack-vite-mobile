@@ -37,7 +37,7 @@ module.exports = {
     filename: 'js/[name].[contenthash].js',
     ...modifyOutput()
   },
-  target: 'web',
+  target: 'browserslist',
   module: {
     rules: [
       // 处理vue
@@ -69,12 +69,7 @@ module.exports = {
       },
       {
         test: /\.(sa|sc|c)ss$/,
-        use: [
-          getStyleLoader(),
-          'css-loader',
-          // 'postcss-loader',
-          'sass-loader'
-        ]
+        use: [getStyleLoader(), 'css-loader', 'sass-loader', 'postcss-loader']
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
