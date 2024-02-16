@@ -3,14 +3,14 @@ import { resolve } from 'path'
 
 import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
-import vitePluginMpa from './build/vite/vite-plugin-mpa'
+import vitePluginEjsMpa from './build/vite/vite-plugin-ejs-mpa'
 
 export default defineConfig({
+  base: './',
   build: {
     minify: 'terser'
   },
-  plugins: [vitePluginMpa(), vue()],
-  publicDir: './public',
+  plugins: [vitePluginEjsMpa(), vue()],
   define: {
     'process.env': {
       __VUE_OPTIONS_API__: false,

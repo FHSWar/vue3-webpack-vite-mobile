@@ -8,6 +8,7 @@ module.exports = {
   plugins: ['stylelint-order'],
   rules: {
     'no-duplicate-selectors': null,
-    'declaration-block-no-shorthand-property-overrides': null
+    'declaration-block-no-shorthand-property-overrides': null,
+    'no-empty-source': null
   }
 }

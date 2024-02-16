@@ -36,7 +36,8 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
     'no-plusplus': 'off',
-    'no-param-reassign': 'off'
+    'no-param-reassign': 'off',
+    'tailwindcss/no-custom-classname': 'off'
   },
   overrides: [
     // webpack配置文件遵循commonjs规范,所以关闭禁止require规则
@@ -48,7 +49,7 @@ module.exports = {
     },
     // 有些依赖不体现在打包产物中，但需要import，所以关闭import规则
     {
-      files: ['*.cjs', 'vite.config.ts', 'vite-plugin-mpa.ts'],
+      files: ['*.cjs', 'vite.config.ts', 'vite-plugin-ejs-mpa.ts'],
       rules: {
         'import/no-extraneous-dependencies': 'off'
       }

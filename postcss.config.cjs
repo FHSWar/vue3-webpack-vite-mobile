@@ -2,7 +2,7 @@ module.exports = {
   plugins: {
     autoprefixer: {},
     'postcss-pxtorem': {
-      rootValue: 16,
+      rootValue: 50,
       propList: ['*']
     },
     tailwindcss: {}

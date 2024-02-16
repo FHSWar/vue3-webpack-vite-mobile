@@ -80,15 +80,14 @@ process.on('SIGINT', () => {
   process.exit()
 })
 
-export default function vitePluginEjs(): PluginOption {
+export default function vitePluginEjsMpa(): PluginOption {
   return {
     name: 'vite-plugin-ejs',
     enforce: 'pre',
     async config() {
       const modulesDir = resolveCwd(`src/modules`)
       const modules = await readdir(modulesDir)
-      // 为了devServer能访问到
-      const tempOutputDir = resolveCwd(`public`)
+      const tempOutputDir = resolveCwd('')
 
       // 确保临时输出目录存在
       await mkdir(tempOutputDir, { recursive: true })

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <h1 class="text-3xl font-bold underline">Hello world!</h1>
-    <p class="default-font font-bold underline">测试pxtorem</p>
+    <h1 class="text-[50px] font-bold underline">Hello world!</h1>
+    <p class="font-bold underline">测试pxtorem</p>
     <div class="default-font">
       <p>
         You have stay here for {{ count }} second, click time: {{ suporka }}
@@ -54,9 +54,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style scoped lang="scss">
-.default-font {
-  font-size: 14px;
-}
-</style>
