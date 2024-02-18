@@ -9,7 +9,6 @@ module.exports = {
   },
   // plugin:prettier/recommended：使用prettier中的样式规范，且如果使得ESLint会检测prettier的格式问题，同样将格式问题以error的形式抛出
   extends: [
-    'plugin:@typescript-eslint/recommended',
     'airbnb-base',
     'plugin:vue-scoped-css/recommended',
     'plugin:vue/vue3-recommended',
@@ -29,7 +28,7 @@ module.exports = {
     parser: '@typescript-eslint/parser',
     sourceType: 'module'
   },
-  plugins: ['vue', '@typescript-eslint'],
+  plugins: ['vue'],
   rules: {
     '@typescript-eslint/no-explicit-any': 'warn',
     'no-console': 'off',
