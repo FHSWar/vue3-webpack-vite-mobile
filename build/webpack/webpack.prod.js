@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 压缩CSS插�
 const TerserWebpackPlugin = require('terser-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const { merge } = require('webpack-merge') // 合并配置文件
-const common = require('./webpack.base.cjs')
+const common = require('./webpack.base.js')
 
 const plugins = [
   // 处理静态文件夹 public 复制到打包的根目录下

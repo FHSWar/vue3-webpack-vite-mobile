@@ -1,10 +1,13 @@
 const { resolve } = require('path')
 const dayjs = require('dayjs')
 const { loader: extractCssLoader } = require('mini-css-extract-plugin') // 压缩CSS插件
+const Components = require('unplugin-vue-components/webpack')
+const AutoImport = require('unplugin-auto-import/webpack')
+const { VarletUIResolver } = require('unplugin-vue-components/resolvers')
 const { VueLoaderPlugin } = require('vue-loader/dist/index') // vue-loader 插件, 需配合 @vue/compiler-sfc 一块使用
 const { DefinePlugin } = require('webpack')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
-const { entry, htmlPlugins } = require('./pages.cjs')
+const { entry, htmlPlugins } = require('./pages.js')
 
 // 用IIFE制作一个缓存函数
 const isProd = (() => {
@@ -89,6 +92,12 @@ module.exports = {
   plugins: [
     // HtmlWebpackPlugin实例们
     ...htmlPlugins,
+    AutoImport({
+      resolvers: [VarletUIResolver({ autoImport: true })]
+    }),
+    Components({
+      resolvers: [VarletUIResolver()]
+    }),
     // 指定环境,定义环境变量，项目中暂时未用到
     new DefinePlugin({
       'process.env': {

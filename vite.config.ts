@@ -1,10 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { resolve } from 'path'
 
-import Components from '@nui/unplugin-vue-components/vite'
-import { PssResolver } from '@nui/unplugin-vue-components/resolvers'
 import vue from '@vitejs/plugin-vue'
-import AutoImport from 'unplugin-auto-import/vite'
+import components from 'unplugin-vue-components/vite'
+import autoImport from 'unplugin-auto-import/vite'
+import { VarletUIResolver } from 'unplugin-vue-components/resolvers'
 import { defineConfig } from 'vite'
 import svgLoader from 'vite-svg-loader'
 import vitePluginEjsMpa from './build/vite/vite-plugin-ejs-mpa'
@@ -18,11 +18,11 @@ export default defineConfig({
     svgLoader(),
     vitePluginEjsMpa(),
     vue(),
-    Components({
-      resolvers: [PssResolver()]
+    components({
+      resolvers: [VarletUIResolver()]
     }),
-    AutoImport({
-      resolvers: [PssResolver({ autoImport: true })]
+    autoImport({
+      resolvers: [VarletUIResolver({ autoImport: true })]
     })
   ],
   define: {

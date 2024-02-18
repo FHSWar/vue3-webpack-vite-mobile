@@ -1,7 +1,7 @@
 const { resolve } = require('path')
 const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin')
 const { merge } = require('webpack-merge')
-const common = require('./webpack.base.cjs')
+const common = require('./webpack.base.js')
 
 module.exports = merge(common, {
   devtool: 'inline-source-map',

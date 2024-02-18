@@ -7,11 +7,11 @@
         You have stay here for {{ count }} second, click time: {{ suporka }}
       </p>
       <button @click="suporka += 1">click</button>
-      <pss-icon name="information" />
-      <pss-button type="info" @click="popupShow = true">信息按钮</pss-button>
-      <pss-popup v-model:show="popupShow" position="bottom">
+      <var-icon name="information" />
+      <var-button type="info" @click="popupShow = true">信息按钮</var-button>
+      <var-popup v-model:show="popupShow" position="bottom">
         <div>demo页面demo组件使用<br /><br /><br /><br /><br /></div>
-      </pss-popup>
+      </var-popup>
     </div>
   </div>
 </template>
