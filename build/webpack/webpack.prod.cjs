@@ -43,6 +43,14 @@ module.exports = merge(common, {
     },
     minimizer: [new CssMinimizerPlugin(), new TerserWebpackPlugin()]
   },
+	output: {
+    filename: 'js/[name].[contenthash].js',
+    environment: {
+      arrowFunction: false,
+      destructuring: false
+    },
+    clean: true
+  },
   // externals: {
   //   axios: 'Axios',
   //   vue: 'Vue',

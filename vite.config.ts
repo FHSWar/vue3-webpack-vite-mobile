@@ -34,6 +34,9 @@ export default defineConfig({
       VUE_BASE_URL: '/'
     }
   },
+	server: {
+		host: '0.0.0.0'
+	},
   resolve: {
     extensions: ['.vue', '.mjs', '.js', '.cjs', '.ts', '.jsx', '.tsx', '.json'],
     alias: {

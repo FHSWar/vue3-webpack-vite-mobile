@@ -1,5 +1,5 @@
 import { createApp } from 'vue' // Vue 3.x 引入 vue 的形式
-import '@/main.css' // 引入tailwind全局样式，一定要在App.vue之前，否则会出现tailwind覆盖neat-ui问题
+import '@/main.css';
 import App from './App.vue' // 引入 APP 页面组建
 // import router from './router'
 import store from './store'

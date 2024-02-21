@@ -3,10 +3,8 @@
     <h1 class="text-[50px] font-bold underline">Hello world!</h1>
     <p class="font-bold underline">测试pxtorem</p>
     <div class="default-font">
-      <p>
-        You have stay here for {{ count }} second, click time: {{ suporka }}
-      </p>
-      <button @click="suporka += 1">click</button>
+      <p>You have stay here for {{ count }} second, click time: {{ fhs }}</p>
+      <button @click="fhs += 1">click</button>
       <pss-icon name="information" />
       <pss-button type="info" @click="popupShow = true">信息按钮</pss-button>
       <pss-popup v-model:show="popupShow" position="bottom">
@@ -31,7 +29,7 @@ interface ResData {
 }
 
 const store = useStore()
-const suporka = ref(0)
+const fhs = ref(0)
 const popupShow = ref(false)
 const count = computed(() => store.state.count)
 if (process.env) {

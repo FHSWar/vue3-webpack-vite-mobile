@@ -1,6 +1,9 @@
 const { resolve } = require('path')
+const Components = require('@nui/unplugin-vue-components/webpack').default
+const { PssResolver } = require('@nui/unplugin-vue-components/resolvers')
 const dayjs = require('dayjs')
 const { loader: extractCssLoader } = require('mini-css-extract-plugin') // 压缩CSS插件
+const AutoImport = require('unplugin-auto-import/webpack').default
 const { VueLoaderPlugin } = require('vue-loader/dist/index') // vue-loader 插件, 需配合 @vue/compiler-sfc 一块使用
 const { DefinePlugin } = require('webpack')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
@@ -19,24 +22,10 @@ const isProd = (() => {
 })()
 const getMode = () => (isProd() ? 'production' : 'development')
 const getStyleLoader = () => (isProd() ? extractCssLoader : 'style-loader')
-const modifyOutput = () => {
-  const prodConf = {
-    environment: {
-      arrowFunction: false,
-      destructuring: false
-    },
-    clean: true
-  }
-  return isProd() ? prodConf : {}
-}
 
 module.exports = {
   mode: getMode(),
   entry,
-  output: {
-    filename: 'js/[name].[contenthash].js',
-    ...modifyOutput()
-  },
   target: 'browserslist',
   module: {
     rules: [
@@ -48,6 +37,10 @@ module.exports = {
       {
         test: /\.(t|j)sx?$/,
         exclude: /node_modules/,
+        resolve: {
+          fullySpecified: false,
+          extensions: ['.js', '.mjs', '.cjs', '.vue', '.ts', '.tsx']
+        },
         use: [
           {
             loader: 'ts-loader',
@@ -89,6 +82,12 @@ module.exports = {
   plugins: [
     // HtmlWebpackPlugin实例们
     ...htmlPlugins,
+    AutoImport({
+      resolvers: [PssResolver({ autoImport: true })]
+    }),
+    Components({
+      resolvers: [PssResolver()]
+    }),
     // 指定环境,定义环境变量，项目中暂时未用到
     new DefinePlugin({
       'process.env': {
@@ -103,7 +102,7 @@ module.exports = {
     new VueLoaderPlugin()
   ],
   resolve: {
-    extensions: ['.js', '.cjs', '.vue', '.ts', '.tsx'],
+    extensions: ['.js', '.mjs', '.cjs', '.vue', '.ts', '.tsx'],
     alias: {
       '@': resolve('src')
     }
