@@ -10,7 +10,7 @@ const calRootFontSize = (document: Document, window: Window) => {
     if (clientWidth / 750 > 0.6)
       docEl.style.fontSize = `${50 * 0.6 * (clientWidth / 375)}px`
     else
-      docEl.style.fontSize = `${((50 * clientWidth) / 750) * (clientWidth / 375)}px`
+      docEl.style.fontSize = `${(((50 * clientWidth) / 375) * clientWidth) / 375}px`
   }
 
   if (!document.addEventListener) return

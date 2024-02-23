@@ -1,11 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { resolve } from 'path'
 
-import Components from '@nui/unplugin-vue-components/vite'
-import { PssResolver } from '@nui/unplugin-vue-components/resolvers'
 import vue from '@vitejs/plugin-vue'
-import AutoImport from 'unplugin-auto-import/vite'
+import { VarletImportResolver } from '@varlet/import-resolver'
+import components from 'unplugin-vue-components/vite'
+import autoImport from 'unplugin-auto-import/vite'
 import { defineConfig } from 'vite'
+import { analyzer } from 'vite-bundle-analyzer'
 import svgLoader from 'vite-svg-loader'
 import vitePluginEjsMpa from './build/vite/vite-plugin-ejs-mpa'
 
@@ -18,11 +19,14 @@ export default defineConfig({
     svgLoader(),
     vitePluginEjsMpa(),
     vue(),
-    Components({
-      resolvers: [PssResolver()]
+		components({
+      resolvers: [VarletImportResolver()]
     }),
-    AutoImport({
-      resolvers: [PssResolver({ autoImport: true })]
+    autoImport({
+      resolvers: [VarletImportResolver({ autoImport: true })]
+    }),
+    analyzer({
+      analyzerMode: 'static'
     })
   ],
   define: {
@@ -34,9 +38,9 @@ export default defineConfig({
       VUE_BASE_URL: '/'
     }
   },
-	server: {
-		host: '0.0.0.0'
-	},
+  server: {
+    host: '0.0.0.0'
+  },
   resolve: {
     extensions: ['.vue', '.mjs', '.js', '.cjs', '.ts', '.jsx', '.tsx', '.json'],
     alias: {

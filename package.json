@@ -17,7 +17,7 @@
 		"preview": "vite preview"
 	},
 	"lint-staged": {
-		"src/**/*.{js,json,css,vue}": [
+		"src/**/*.{js,json,vue}": [
 			"prettier --write",
 			"npm run lint"
 		],
@@ -29,14 +29,15 @@
 		"create",
 		"vue"
 	],
-	"author": "DUJINHUA506",
+	"author": "fhswar0504@163.com",
 	"license": "MIT",
 	"dependencies": {
+		"@varlet/ui": "^3.0.3",
 		"axios": "^1.6.7",
 		"core-js": "^3.36.0",
-		"neat-ui": "^0.4.0",
+		"reset-css": "^5.0.2",
 		"vue": "^3.4.19",
-		"vue-router": "^4.2.5",
+		"vue-router": "^4.3.0",
 		"vuex": "^4.1.0"
 	},
 	"devDependencies": {
@@ -46,8 +47,6 @@
 		"@babel/preset-typescript": "^7.23.3",
 		"@babel/runtime": "^7.23.9",
 		"@babel/runtime-corejs3": "^7.23.9",
-		"@nui/icons": "^0.5.12",
-		"@nui/unplugin-vue-components": "^0.0.1",
 		"@rollup/plugin-terser": "^0.4.4",
 		"@soda/friendly-errors-webpack-plugin": "^1.8.1",
 		"@types/ejs": "^3.1.5",
@@ -55,6 +54,7 @@
 		"@types/webpack-env": "^1.18.4",
 		"@typescript-eslint/eslint-plugin": "^7.0.2",
 		"@typescript-eslint/parser": "^7.0.2",
+		"@varlet/import-resolver": "^3.0.3",
 		"@vitejs/plugin-vue": "^5.0.4",
 		"@vue/compiler-sfc": "^3.4.19",
 		"@vue/eslint-config-typescript": "^12.0.0",
@@ -71,7 +71,7 @@
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-import": "^2.29.1",
 		"eslint-plugin-prettier": "^5.1.3",
-		"eslint-plugin-tailwindcss": "^3.14.2",
+		"eslint-plugin-tailwindcss": "^3.14.3",
 		"eslint-plugin-vue": "^9.21.1",
 		"eslint-plugin-vue-scoped-css": "^2.7.2",
 		"fork-ts-checker-webpack-plugin": "^9.0.2",
@@ -99,7 +99,9 @@
 		"ts-loader": "^9.5.1",
 		"typescript": "^5.3.3",
 		"unplugin-auto-import": "^0.17.5",
-		"vite": "^5.1.3",
+		"unplugin-vue-components": "^0.26.0",
+		"vite": "^5.1.4",
+		"vite-bundle-analyzer": "^0.8.0",
 		"vite-svg-loader": "^5.1.0",
 		"vue-loader": "^17.4.2",
 		"vue-tsc": "^1.8.27",

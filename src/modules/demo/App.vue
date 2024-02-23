@@ -4,12 +4,8 @@
     <p class="font-bold underline">测试pxtorem</p>
     <div class="default-font">
       <p>You have stay here for {{ count }} second, click time: {{ fhs }}</p>
-      <button @click="fhs += 1">click</button>
-      <pss-icon name="information" />
-      <pss-button type="info" @click="popupShow = true">信息按钮</pss-button>
-      <pss-popup v-model:show="popupShow" position="bottom">
-        <div>demo页面demo组件使用<br /><br /><br /><br /><br /></div>
-      </pss-popup>
+
+      <var-button>选择单个日期</var-button>
     </div>
   </div>
 </template>
@@ -30,7 +26,7 @@ interface ResData {
 
 const store = useStore()
 const fhs = ref(0)
-const popupShow = ref(false)
+
 const count = computed(() => store.state.count)
 if (process.env) {
   console.log(
