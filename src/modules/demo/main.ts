@@ -1,5 +1,6 @@
-import { createApp } from 'vue' // Vue 3.x 引入 vue 的形式
 import 'reset-css'
+import { createPinia } from 'pinia'
+import { createApp } from 'vue' // Vue 3.x 引入 vue 的形式
 import '@/main.css'
 import {
   calRootFontSize, // 引入计算根字体大小的模块
@@ -7,10 +8,10 @@ import {
 } from '@/utils'
 import routes from './routes'
 import App from './App.vue' // 引入 APP 页面组建
-import store from './store'
 
 const app = createApp(App) // 通过 createApp 初始化 app
+const pinia = createPinia()
 const router = mountRouter(routes)
-app.use(router).use(store).mount('#app') // 将页面挂载到root节点
 
+app.use(router).use(pinia).mount('#app') // 将页面挂载到root节点
 calRootFontSize(document, window) // 调用计算根字体大小的方法

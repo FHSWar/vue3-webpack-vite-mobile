@@ -1,25 +1,17 @@
-import { createStore } from 'vuex'
+import { defineStore } from 'pinia'
 
-export default createStore({
-  state: {
+export { useCommonPinia } from '@/utils'
+export const useModulePinia = defineStore('demo', {
+  state: () => ({
     count: 0,
     fhs: 'fhs'
-  },
-  mutations: {
-    increment(state) {
-      state.count++
-    },
-    decrement(state) {
-      state.count--
-    }
-  },
+  }),
   actions: {
-    countUp(ctx) {
-      ctx.commit('increment')
+    increment() {
+      this.count += 1
     },
-    countDown(ctx) {
-      ctx.commit('decrement')
+    decrement() {
+      this.count -= 1
     }
-  },
-  modules: {}
+  }
 })

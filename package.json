@@ -35,10 +35,10 @@
 		"axios": "^1.6.7",
 		"core-js": "^3.36.0",
 		"neat-ui": "^0.7.0",
+		"pinia": "^2.1.7",
 		"reset-css": "^5.0.2",
 		"vue": "^3.4.19",
-		"vue-router": "^4.3.0",
-		"vuex": "^4.1.0"
+		"vue-router": "^4.3.0"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.23.9",

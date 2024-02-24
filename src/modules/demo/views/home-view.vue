@@ -21,8 +21,8 @@
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
-import { useStore } from 'vuex'
 import axios from '@/apis/index'
+import { useModulePinia } from '../store'
 
 interface ResData {
   user: {
@@ -33,7 +33,7 @@ interface ResData {
   }[]
 }
 
-const store = useStore()
+const store = useModulePinia()
 const fhs = ref(0)
 const popupShow = ref(false)
 const show = ref(false)
@@ -56,7 +56,7 @@ async function picker() {
   console.log('state, texts, indexes', state, texts, indexes)
 }
 
-const count = computed(() => store.state.count)
+const count = computed(() => store.count)
 if (process.env) {
   console.log(
     `VUEP_BASE_URL=${process.env.VUE_BASE_URL}`,
@@ -64,7 +64,7 @@ if (process.env) {
   )
 }
 setInterval(() => {
-  store.dispatch('countUp')
+  store.increment()
 }, 1000)
 
 axios.get<ResData>('/head.json', {}).then((res) => {
