@@ -8,8 +8,10 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     PssButton: typeof import('neat-ui')['_ButtonComponent']
+    PssCalendar: typeof import('neat-ui')['_CalendarComponent']
     PssIcon: typeof import('neat-ui')['_IconComponent']
     PssPopup: typeof import('neat-ui')['_PopupComponent']
+    PssSpace: typeof import('neat-ui')['_SpaceComponent']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

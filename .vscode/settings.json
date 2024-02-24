@@ -1,6 +1,6 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit"
+    "source.fixAll": true
   },
   "editor.detectIndentation": false,
   "editor.tokenColorCustomizations": {
@@ -14,5 +14,10 @@
     ]
   },
   "eslint.validate": ["javascript", "typescript", "tsx", "vue"],
-  "stylelint.validate": ["css", "scss", "vue", "postcss"]
+  "stylelint.validate": [
+    "css",
+    "scss",
+    "vue",
+    "postcss"
+  ]
 }
