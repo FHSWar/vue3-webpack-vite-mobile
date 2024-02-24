@@ -1,12 +1,16 @@
 import { createApp } from 'vue' // Vue 3.x 引入 vue 的形式
 import 'reset-css'
 import '@/main.css'
+import {
+  calRootFontSize, // 引入计算根字体大小的模块
+  mountRouter // 挂载路由，返回路由对象
+} from '@/utils'
+import routes from './routes'
 import App from './App.vue' // 引入 APP 页面组建
-// import router from './router'
 import store from './store'
-import calRootFontSize from '@/utils/calc-root-font-size' // 引入计算根字体大小的模块
 
 const app = createApp(App) // 通过 createApp 初始化 app
-app.use(store).mount('#app') // 将页面挂载到 root 节点 // .use(router)
+const router = mountRouter(routes)
+app.use(router).use(store).mount('#app') // 将页面挂载到root节点
 
 calRootFontSize(document, window) // 调用计算根字体大小的方法
