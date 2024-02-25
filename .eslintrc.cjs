@@ -35,7 +35,8 @@ module.exports = {
     'import/extensions': 'off',
     'no-plusplus': 'off',
     'no-param-reassign': 'off',
-    'tailwindcss/no-custom-classname': 'off'
+    'tailwindcss/no-custom-classname': 'off',
+    'vue/no-v-html': 'error'
   },
   overrides: [
     // webpack配置文件遵循commonjs规范,所以关闭禁止require规则

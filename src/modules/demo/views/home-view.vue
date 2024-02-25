@@ -1,5 +1,5 @@
 <template>
-  <pss-space id="app" class="text-[24px]">
+  <pss-space id="app" class="p-[8px] text-[24px]">
     <div>
       <p>You have stay here for {{ count }} second, click time: {{ fhs }}</p>
     </div>
@@ -8,12 +8,16 @@
       <p class="underline">测试pxtorem</p>
     </div>
     <div>
-      <pss-button @click="show = true">选择单个日期</pss-button>
-      <pss-button type="primary" @click="picker">多列选择</pss-button>
-      <pss-icon name="information" />
+      <pss-space>
+        <pss-button @click="popupShow = true">显示popup</pss-button>
+        <pss-button type="success" @click="show = true">
+          选择单个日期
+        </pss-button>
+        <pss-button type="primary" @click="picker">多列选择</pss-button>
+      </pss-space>
     </div>
     <pss-popup v-model:show="popupShow" position="bottom">
-      <div>demo页面demo组件使用<br /><br /><br /><br /><br /></div>
+      <div class="h-[500px]">demo页面demo组件使用</div>
     </pss-popup>
     <pss-calendar v-model:show="show" @confirm="onConfirm" />
   </pss-space>
