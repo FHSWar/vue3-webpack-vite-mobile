@@ -11,6 +11,9 @@ dependencies:
   core-js:
     specifier: ^3.36.0
     version: 3.36.0
+  dompurify:
+    specifier: ^3.0.9
+    version: 3.0.9
   lodash-es:
     specifier: ^4.17.21
     version: 4.17.21
@@ -64,6 +67,9 @@ devDependencies:
   '@soda/friendly-errors-webpack-plugin':
     specifier: ^1.8.1
     version: 1.8.1(webpack@5.90.3)
+  '@types/dompurify':
+    specifier: ^3.0.5
+    version: 3.0.5
   '@types/ejs':
     specifier: ^3.1.5
     version: 3.1.5
@@ -2135,6 +2141,12 @@ packages:
     dependencies:
       '@types/node': 20.11.19
 
+  /@types/dompurify@3.0.5:
+    resolution: {integrity: sha512-1Wg0g3BtQF7sSb27fJQAKck1HECM6zV1EB66j8JH9i3LCjYabJa0FSdiSgsD5K/RbrsR0SiraKacLB+T8ZVYAg==}
+    dependencies:
+      '@types/trusted-types': 2.0.7
+    dev: true
+
   /@types/ejs@3.1.5:
     resolution: {integrity: sha512-nv+GSx77ZtXiJzwKdsASqi+YQ5Z7vwHsTP0JY2SiQgjGckkBRKZnk8nIM+7oUZ1VCtuTz0+By4qVR7fqzp/Dfg==}
     dev: true
@@ -2256,6 +2268,10 @@ packages:
     resolution: {integrity: sha512-MK9V6NzAS1+Ud7JV9lJLFqW85VbC9dq3LmwZCuBe4wBDgKC0Kj/jd8Xl+nSviU+Qc3+m7umHHyHg//2KSa0a0Q==}
     dependencies:
       '@types/node': 20.11.19
+
+  /@types/trusted-types@2.0.7:
+    resolution: {integrity: sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==}
+    dev: true
 
   /@types/webpack-env@1.18.4:
     resolution: {integrity: sha512-I6e+9+HtWADAWeeJWDFQtdk4EVSAbj6Rtz4q8fJ7mSr1M0jzlFcs8/HZ+Xb5SHzVm1dxH7aUiI+A8kA8Gcrm0A==}
@@ -3988,6 +4004,10 @@ packages:
     dependencies:
       domelementtype: 2.3.0
     dev: true
+
+  /dompurify@3.0.9:
+    resolution: {integrity: sha512-uyb4NDIvQ3hRn6NiC+SIFaP4mJ/MdXlvtunaqK9Bn6dD3RuB/1S/gasEjDHD8eiaqdSael2vBv+hOs7Y+jhYOQ==}
+    dev: false
 
   /domutils@2.8.0:
     resolution: {integrity: sha512-w96Cjofp72M5IIhpjgobBimYEfoPjx1Vx0BSX9P30WBdZW2WIKU0T1Bd0kz2eNZ9ikjKgHbEyKx8BB6H1L3h3A==}

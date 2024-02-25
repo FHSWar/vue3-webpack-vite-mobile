@@ -1,7 +1,8 @@
+// @ts-nocheck
 /**
  * @file native接口文件
  */
-import { appVersion } from '@config'
+import { appVersion } from '@/utils'
 
 const KdeNative = {
   initNum: 0,

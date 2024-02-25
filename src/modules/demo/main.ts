@@ -5,6 +5,11 @@ import { vSafeHtml } from '@/directives' // 按需打包的防xss指令
 import '@/main.css'
 import {
   calRootFontSize, // 引入计算根字体大小的模块
+  initEventTrack, // 初始化业务埋点sdk
+  initKdeNative, // 初始化native交互
+  initPapm, // 初始化papm性能sdk
+  initUIAutomation, // 初始化女娲UI自动化sdk
+  checkWebp,
   mountRouter // 挂载路由，返回路由对象
 } from '@/utils'
 import routes from './routes'
@@ -15,4 +20,9 @@ const pinia = createPinia()
 const router = mountRouter(routes)
 
 app.use(router).use(pinia).directive('safe-html', vSafeHtml).mount('#app') // 将页面挂载到root节点
-calRootFontSize(document, window) // 调用计算根字体大小的方法
+calRootFontSize(document, window)
+checkWebp()
+initEventTrack()
+initKdeNative(document, window)
+initPapm()
+initUIAutomation()

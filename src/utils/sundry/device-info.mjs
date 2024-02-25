@@ -1,4 +1,4 @@
-const { href, origin } = window.location
+const { origin, pathname, search } = window.location
 
 export const ua = window.navigator.userAgent.toLocaleLowerCase() // 当前浏览器
 export const isAndroid = /android/.test(ua) // 是否为Android系统
@@ -21,7 +21,7 @@ export const isPrd = [
   .includes(true)
 
 export const isLogin = /^on/g.test(
-  new URLSearchParams(new URL(href)).get('isLogin')
+  new URLSearchParams(search).get('isLogin') || ''
 )
 export const debugH5 = ua.indexOf('debugh5') !== -1 // 是否包含调试h5标识
 export const isUiTest = window.name === 'edit-wrapper-iframe' // 自动化测试编辑窗口
@@ -37,9 +37,8 @@ export const screenHeight =
   parseInt(ua.split('screenheight=')[1].split(' ')[0], 10)
 
 // 当前模块名
-export const MODULE_NAME = window.location.pathname
-  .match(/(^\/)?(\w*)+(.html$){1}/)
-  .splice(2, 1)
+export const MODULE_NAME =
+  pathname.match(/(^\/)?(\w*)+(.html$){1}/)?.splice(2, 1) || ''
 
 // app版本号
 export const appVersion = isIos
@@ -50,7 +49,7 @@ export const appVersion = isIos
 export const deviceId = JSON.parse(
   isIos
     ? (ua.split('kdeappinfo=')[1] &&
-        /\{([^\\}])*\}/g.exec(ua.split('kdeappinfo=')[1])[0]) ||
+        /\{([^\\}])*\}/g.exec(ua.split('kdeappinfo=')[1])?.shift()) ||
         '{}'
     : (ua.split('kdeappinfo=')[1] &&
         ua.split('kdeappinfo=')[1].split('_')[0]) ||

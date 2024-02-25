@@ -43,7 +43,7 @@ module.exports = merge(common, {
     },
     minimizer: [new CssMinimizerPlugin(), new TerserWebpackPlugin()]
   },
-	output: {
+  output: {
     filename: 'js/[name].[contenthash].js',
     environment: {
       arrowFunction: false,

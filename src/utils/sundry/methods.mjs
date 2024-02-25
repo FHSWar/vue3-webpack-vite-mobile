@@ -1,4 +1,5 @@
-import { isAndroid, isIos } from './device-info.cjs'
+// @ts-nocheck
+import { isAndroid, isIos } from '@/utils'
 
 /* 动态加载js文件 */
 export const createScript = (url) => {
@@ -125,7 +126,7 @@ export function erudaDebugger({ isPrd, isNative, debugH5 }, cb) {
 // 获取android 或者ios版本号
 export const getPlatformVersion = (useAgent) => {
   // eslint-disable-next-line
-	const _useAgent = useAgent || window.navigator.userAgent;
+  const _useAgent = useAgent || window.navigator.userAgent
   let sysVersion = 10
   try {
     if (isIos) {
@@ -185,86 +186,4 @@ export const getUrlQuery = (name, url, flag = false) => {
     r = u.substr(u.indexOf('?') + 1).match(reg)
   }
   return r !== null ? r[2] : ''
-}
-
-/**
- * 导出页面为PNG图片格式
- * html2Canvas(html转图片插件)
- * dom(需要导出的dom节点)
- * scale(放大倍数，提升清晰度)
- * title(导出文件名)
- */
-export const getPng = (html2Canvas, dom, scale, title, reaScale) =>
-  new Promise((resolve) => {
-    if (dom) {
-      // DOM 节点计算后宽高
-      const box = window.getComputedStyle(dom)
-      const width = parseInt(box.width, 10)
-      const height = parseInt(box.height, 10)
-      // 获取像素比，放大3倍，提升清晰度
-      let scaleBy = window.devicePixelRatio ? window.devicePixelRatio : 3
-      if (scaleBy < scale) scaleBy = scale
-      if (reaScale) {
-        scaleBy = reaScale
-      }
-      // 设定 canvas 元素属性宽高为 DOM 节点宽高 * 像素比
-      const canvas = document.createElement('canvas')
-      canvas.width = width * scaleBy
-      canvas.height = height * scaleBy
-      // 设定 canvas css宽高为 DOM 节点宽高
-      canvas.style.width = `${width}px`
-      canvas.style.height = `${height}px`
-      // 将所有绘制内容放大像素比倍
-      const context = canvas.getContext('2d')
-      context.scale(scaleBy, scaleBy)
-      // 生成canvas
-      html2Canvas(dom, {
-        canvas,
-        scale: scaleBy,
-        useCORS: true,
-        allowTaint: false,
-        width,
-        height
-      })
-        .then((htmlCanvas) => {
-          // canvas转png图片下载
-          const dataurl = htmlCanvas.toDataURL('image/png')
-          const blob = dataurl.split(',')[1]
-          // let image = document.createElement("a");
-          // image.setAttribute('href', dataurl);
-          // image.setAttribute('style', 'visibility:hidden');
-          // image.setAttribute('download', `${ title }.png`);
-          // document.body.appendChild(image);
-          // image.click();
-          // document.body.removeChild(image);
-          resolve(blob)
-        })
-        .catch((err) => {
-          console.log(err)
-          resolve(err)
-        })
-    } else {
-      resolve('')
-    }
-  })
-
-/**
- * 模块间跳转公共方法
- * @param moduleName 模块名称 例如：:exam"
- * @param routerHash 路由名称 不携带"/" 例如："exam_list"
- * @param param 跳转路由参数 例如： #／exam_list？name=11
- */
-export const toPage = (moduleName, routerHash, param) => {
-  if (!moduleName || !routerHash) return
-  let { pathname } = window.location
-  pathname = pathname.substr(0, pathname.lastIndexOf('/'))
-  if (param) {
-    window.location.href = `${
-      window.location.origin + pathname
-    }/${moduleName}.html${window.location.search}#/${routerHash}?${param}`
-  } else {
-    window.location.href = `${
-      window.location.origin + pathname
-    }/${moduleName}.html${window.location.search}#/${routerHash}`
-  }
 }

@@ -46,6 +46,12 @@ module.exports = {
         '@typescript-eslint/no-var-requires': 'off'
       }
     },
+    {
+      files: ['*.mjs'],
+      rules: {
+        '@typescript-eslint/ban-ts-comment': 'off'
+      }
+    },
     // 有些依赖不体现在打包产物中，但需要import，所以关闭import规则
     {
       files: ['*.cjs', 'vite.config.ts', 'vite-plugin-ejs-mpa.ts'],

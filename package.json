@@ -14,10 +14,11 @@
 		"lintcss": "stylelint \"src/**/*.{css,scss,vue}\" --fix",
 		"precommit": "lint-staged",
 		"prepare": "husky",
+		"prettier": "prettier --write \"src/**/*.{css,sass,cjs,js,json,ts,tsx,vue}\"",
 		"preview": "vite preview"
 	},
 	"lint-staged": {
-		"src/**/*.{js,json,vue}": [
+		"src/**/*.{cjs,js,json,ts,tsx,vue}": [
 			"prettier --write",
 			"npm run lint"
 		],
@@ -34,6 +35,7 @@
 	"dependencies": {
 		"axios": "^1.6.7",
 		"core-js": "^3.36.0",
+		"dompurify": "^3.0.9",
 		"lodash-es": "^4.17.21",
 		"neat-ui": "^0.7.0",
 		"pinia": "^2.1.7",
@@ -53,6 +55,7 @@
 		"@nui/unplugin-vue-components": "^0.0.1",
 		"@rollup/plugin-terser": "^0.4.4",
 		"@soda/friendly-errors-webpack-plugin": "^1.8.1",
+		"@types/dompurify": "^3.0.5",
 		"@types/ejs": "^3.1.5",
 		"@types/node": "^20.11.19",
 		"@types/webpack-env": "^1.18.4",

@@ -21,6 +21,7 @@
     </pss-popup>
     <pss-calendar v-model:show="show" @confirm="onConfirm" />
   </pss-space>
+  <!-- <div v-safe-html="htmlStr"></div> -->
 </template>
 
 <script lang="ts" setup>
@@ -37,6 +38,7 @@ interface ResData {
   }[]
 }
 
+// const htmlStr = `<div style="width: 100px; height: 100px; background-color: red"></div>`
 const store = useModulePinia()
 const fhs = ref(0)
 const popupShow = ref(false)
