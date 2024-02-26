@@ -5,11 +5,11 @@
 	"main": "index.js",
 	"type": "module",
 	"scripts": {
-		"anls": "ANALYZE=true webpack --config build/webpack/webpack.prod.cjs",
-		"dev": "vite --force",
-		"dev:webpack": "NODE_ENV=development webpack serve --progress --hot --config build/webpack/webpack.dev.cjs",
-		"build": "NODE_ENV=production webpack --config build/webpack/webpack.prod.cjs",
-		"build:vite": "vue-tsc --noEmit && vite build",
+		"anls": "node ./script/erase-html.cjs && ANALYZE=true webpack --config build/webpack/webpack.prod.cjs",
+		"dev": "node ./script/erase-html.cjs && vite --force",
+		"dev:webpack": "node ./script/erase-html.cjs && NODE_ENV=development webpack serve --progress --hot --config build/webpack/webpack.dev.cjs",
+		"build": "node ./script/erase-html.cjs && NODE_ENV=production webpack --config build/webpack/webpack.prod.cjs",
+		"build:vite": "node ./script/erase-html.cjs && vue-tsc --noEmit && vite build",
 		"lint": "eslint --fix --ext .ts,.vue src",
 		"lintcss": "stylelint \"src/**/*.{css,scss,vue}\" --fix",
 		"precommit": "lint-staged",
@@ -18,7 +18,7 @@
 		"preview": "vite preview"
 	},
 	"lint-staged": {
-		"src/**/*.{cjs,js,json,ts,tsx,vue}": [
+		"src/**/*.{cjs,js,ts,tsx,vue}": [
 			"prettier --write",
 			"npm run lint"
 		],

@@ -38,7 +38,7 @@ interface ResData {
   }[]
 }
 
-// const htmlStr = `<div style="width: 100px; height: 100px; background-color: red"></div>`
+// const htmlStr = `<div style="width: 100px; height: 100px; background-color: red"></div><img src="x" onerror="alert('恶意代码👻')"/>`
 const store = useModulePinia()
 const fhs = ref(0)
 const popupShow = ref(false)
