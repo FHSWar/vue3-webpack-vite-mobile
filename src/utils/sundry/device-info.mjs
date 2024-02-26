@@ -6,8 +6,8 @@ export const isIos = /iphone|ipod|ipad/.test(ua) // 是否为IOS系统
 export const isNative = /from:esalesapp/.test(ua) // 是否为客户端环境
 export const isWx = ua.indexOf('micromessenger') !== -1 // 是否微信X5内核
 
-const isDevOps = /\/\/pssdevopsbd\./.test(window.location.href) // @todo:devops
-export const isDevEnv = process.env.NODE_ENV === 'development' // @todo:devops
+const isDevOps = /\/\/pssdevopsbd\./.test(window.location.href)
+export const isDevEnv = process.env.NODE_ENV === 'development'
 export const isIntranet = /paic.com.cn/.test(origin) // 内网
 export const isStg1 = /-stg1/.test(origin) // 测试1
 export const isStg2 = /-stg2/.test(origin) // 测试2
