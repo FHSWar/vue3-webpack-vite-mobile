@@ -16,25 +16,24 @@ const plugins = [
         to: resolve(process.cwd(), 'dist')
       }
     ]
-  }),
-  new MiniCssExtractPlugin({
-    filename: 'css/[name].[contenthash].css',
-    chunkFilename: 'css/[name].[contenthash].css'
   })
 ]
 
-if (process.env.ANALYZE) {
-  plugins.push(
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'server',
-      analyzerHost: 'localhost',
-      reportFilename: 'report.html',
-      defaultSizes: 'gzip',
-      generateStatsFile: false,
-      logLevel: 'info'
-    })
-  )
-}
+plugins.push(
+  process.env.ANALYZE
+    ? new BundleAnalyzerPlugin({
+        analyzerMode: 'server',
+        analyzerHost: 'localhost',
+        reportFilename: 'report.html',
+        defaultSizes: 'gzip',
+        generateStatsFile: false,
+        logLevel: 'info'
+      })
+    : new MiniCssExtractPlugin({
+        filename: 'css/[name].[contenthash].css',
+        chunkFilename: 'css/[name].[contenthash].css'
+      })
+)
 
 module.exports = merge(common, {
   optimization: {

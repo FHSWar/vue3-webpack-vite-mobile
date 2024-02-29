@@ -9,10 +9,10 @@
     </div>
     <div>
       <pss-space>
-        <pss-button @click="popupShow = true">显示popup</pss-button>
-        <pss-button type="success" @click="show = true">
-          选择单个日期
+        <pss-button type="success" @click="popupShow = true">
+          显示popup
         </pss-button>
+        <pss-button @click="show = true"> 选择单个日期 </pss-button>
         <pss-button type="primary" @click="picker">多列选择</pss-button>
       </pss-space>
     </div>

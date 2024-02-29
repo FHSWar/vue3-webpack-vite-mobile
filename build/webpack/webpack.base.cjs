@@ -16,12 +16,13 @@ const isProd = (() => {
     if (cache !== undefined) {
       return cache // 如果已经计算过，直接返回之前的计算结果
     }
-    cache = process.env.NODE_ENV === 'production' // 计算一次并缓存结果
+    cache = process.env.NODE_ENV === 'production' || process.env.ANALYZE // 计算一次并缓存结果
     return cache
   }
 })()
 const getMode = () => (isProd() ? 'production' : 'development')
-const getStyleLoader = () => (isProd() ? extractCssLoader : 'style-loader')
+const getStyleLoader = () =>
+  isProd() && !process.env.ANALYZE ? extractCssLoader : 'style-loader'
 
 module.exports = {
   mode: getMode(),
