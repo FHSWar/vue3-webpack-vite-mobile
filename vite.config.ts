@@ -17,7 +17,10 @@ export default defineConfig({
 	},
 	plugins: [
 		svgLoader(),
-		vitePluginAutoRouter(),
+		vitePluginAutoRouter({
+			mode: 'mpa',
+			pagesDir: 'modules'
+		}),
 		vitePluginEjsMpa(),
 		vue(),
 		Components({
