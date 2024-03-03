@@ -1,6 +1,9 @@
 const { resolve } = require('path')
+const { VarletImportResolver } = require('@varlet/import-resolver')
 const dayjs = require('dayjs')
 const { loader: extractCssLoader } = require('mini-css-extract-plugin') // 压缩CSS插件
+const Components = require('unplugin-vue-components/webpack')
+const AutoImport = require('unplugin-auto-import/webpack')
 const { VueLoaderPlugin } = require('vue-loader/dist/index') // vue-loader 插件, 需配合 @vue/compiler-sfc 一块使用
 const { DefinePlugin } = require('webpack')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
@@ -80,6 +83,12 @@ module.exports = {
 	plugins: [
 		// HtmlWebpackPlugin实例们
 		...htmlPlugins,
+		Components.default({
+			resolvers: [VarletImportResolver()]
+		}),
+		AutoImport.default({
+			resolvers: [VarletImportResolver({ autoImport: true })]
+		}),
 		// 指定环境,定义环境变量，项目中暂时未用到
 		new DefinePlugin({
 			'process.env': {

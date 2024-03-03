@@ -2,7 +2,11 @@
 import { resolve } from 'path'
 
 import vue from '@vitejs/plugin-vue'
+import { VarletImportResolver } from '@varlet/import-resolver'
+import components from 'unplugin-vue-components/vite'
+import autoImport from 'unplugin-auto-import/vite'
 import { defineConfig } from 'vite'
+// import { analyzer } from 'vite-bundle-analyzer'
 import svgLoader from 'vite-svg-loader'
 import vitePluginAutoRouter from './build/vite/vite-plugin-auto-router'
 import vitePluginEjsMpa from './build/vite/vite-plugin-ejs-mpa'
@@ -13,6 +17,12 @@ export default defineConfig({
 		minify: 'terser'
 	},
 	plugins: [
+		components({
+			resolvers: [VarletImportResolver()]
+		}),
+		autoImport({
+			resolvers: [VarletImportResolver({ autoImport: true })]
+		}),
 		svgLoader(),
 		vitePluginAutoRouter({
 			mode: 'mpa',
