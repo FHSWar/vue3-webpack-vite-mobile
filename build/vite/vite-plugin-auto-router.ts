@@ -15,11 +15,7 @@ interface AutoRouterPluginOptions {
 	routerFile: string
 }
 
-function generateRoutes(
-	viewsDir: string,
-	routerFile: string,
-	options: AutoRouterPluginOptions
-) {
+function generateRoutes(viewsDir: string, routerFile: string) {
 	// 使用 glob.sync 匹配 views 目录下的所有 .vue 文件，包括子目录
 	const files = sync('**/*.vue', { cwd: viewsDir })
 
@@ -33,17 +29,21 @@ function generateRoutes(
 
 	// 映射文件路径为路由配置
 	const routes = filteredFiles.map((file) => {
-		const fileBase = basename(file, '.vue')
-
+		const fileBaseName = basename(file, '.vue')
 		// 拼出键值对
-		const nameVal = fileBase === 'index' ? file.split('/')[0] : fileBase
-		const namePair = `name: '${nameVal}'`
-		const pathPair = `path: '/${nameVal}'`
+		const routeName =
+			fileBaseName === 'index' ? file.split('/')[0] : fileBaseName
+		const pathVal = `/${routeName !== 'index' ? routeName : ''}`
 		// posix能保证不同系统的路径都是`/`，不会出现windows里面的`\`
-		const componentPair = `component: () => import('${posix.join(options.viewsDir, file).replace(/\\/g, '/').replace('src', '@')}')`
+		const componentPath = relative(
+			process.cwd(),
+			posix.join(viewsDir, file).replace(/\\/g, '/')
+		).replace('src', '@')
+		//
+		console.log('🚀 ~ routes ~ componentPath:', componentPath)
 
 		// 用符合项目eslint规则的换行和缩进拼接起来
-		const routeConfig = `{\n\t\t${pathPair},\n\t\t${namePair},\n\t\t${componentPair}\n\t}`
+		const routeConfig = `{\n\t\tpath: '${pathVal}',\n\t\tname: '${routeName}',\n\t\tcomponent: () => import('${componentPath}')\n\t}`
 
 		return routeConfig
 	})
@@ -52,8 +52,13 @@ function generateRoutes(
 	const routerArray = `const routes: RouteRecordRaw[] = [\n\t${routes.join(',\n\t')}\n]`
 	// 拼接生成路由配置文件内容
 	const routerConfig = `${importStatement}\n\n${routerArray}\n\nexport default routes\n`
+
 	// 写入路由配置到文件
-	writeFileSync(routerFile, routerConfig, 'utf-8')
+	try {
+		writeFileSync(routerFile, routerConfig, 'utf-8')
+	} catch (error) {
+		console.error(`写入配置文件错误: ${error}`)
+	}
 }
 
 function vitePluginAutoRouter(
@@ -69,7 +74,7 @@ function vitePluginAutoRouter(
 			const viewsDir = resolve(config.root, options.viewsDir)
 			const routerFilePath = resolve(config.root, options.routerFile)
 
-			generateRoutes(viewsDir, routerFilePath, options)
+			generateRoutes(viewsDir, routerFilePath)
 		},
 		handleHotUpdate({ file, server }) {
 			if (file.endsWith('.vue')) {
@@ -77,7 +82,7 @@ function vitePluginAutoRouter(
 				const routerFilePath = resolve(server.config.root, options.routerFile)
 
 				if (file.startsWith(viewsDirResolved))
-					generateRoutes(viewsDirResolved, routerFilePath, options)
+					generateRoutes(viewsDirResolved, routerFilePath)
 			}
 		}
 	}
