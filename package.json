@@ -6,7 +6,7 @@
 	"type": "module",
 	"scripts": {
 		"anls": "node ./script/erase-html.cjs && ANALYZE=true webpack --config build/webpack/webpack.prod.cjs",
-		"dev": "node ./script/erase-html.cjs && vite --force",
+		"dev": "node ./script/erase-html.cjs && vite",
 		"dev:webpack": "node ./script/erase-html.cjs && NODE_ENV=development webpack serve --progress --hot --config build/webpack/webpack.dev.cjs",
 		"build": "node ./script/erase-html.cjs && NODE_ENV=production webpack --config build/webpack/webpack.prod.cjs",
 		"build:vite": "node ./script/erase-html.cjs && vue-tsc --noEmit && vite build",

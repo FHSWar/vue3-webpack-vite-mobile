@@ -16,9 +16,9 @@ module.exports = {
 		'plugin:tailwindcss/recommended'
 	],
 	globals: {
-		Atomics: 'readonly',
-		SharedArrayBuffer: 'readonly'
+		RouterView: 'readonly'
 	},
+	parser: 'vue-eslint-parser',
 	parserOptions: {
 		ecmaFeatures: {
 			jsx: true
@@ -37,7 +37,9 @@ module.exports = {
 		'no-plusplus': 'off',
 		'no-param-reassign': 'off',
 		'tailwindcss/no-custom-classname': 'off',
-		'vue/no-v-html': 'error'
+		'vue/multi-word-component-names': ['error', { ignores: ['index'] }],
+		'vue/no-v-html': 'error',
+		'vue/no-undef-components': ['error', { ignorePatterns: ['pss(\\-\\w+)+'] }]
 	},
 	overrides: [
 		// webpack配置文件遵循commonjs规范,所以关闭禁止require规则

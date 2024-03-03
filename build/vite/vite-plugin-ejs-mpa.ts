@@ -13,7 +13,7 @@ import {
 	unlink,
 	writeFile
 } from 'fs/promises'
-import { join, resolve } from 'path'
+import { join, relative, resolve } from 'path'
 import { render } from 'ejs'
 import { PluginOption } from 'vite'
 
@@ -53,7 +53,7 @@ async function renderEjsToHtml(
 
 	const template = await readFile(ejsPath, 'utf-8')
 	const srcPath = resolveCwd(`src/modules/${moduleName}/main.ts`)
-	const entryScriptTag = `<script type="module" src="${srcPath}"></script>`
+	const entryScriptTag = `<script type="module" src="/${relative(process.cwd(), srcPath)}"></script>`
 	const htmlContent = render(template, {
 		VITE_ENTRY_SCRIPT: entryScriptTag
 	})
