@@ -39,7 +39,7 @@ module.exports = {
 		'tailwindcss/no-custom-classname': 'off',
 		'vue/multi-word-component-names': ['error', { ignores: ['index'] }],
 		'vue/no-v-html': 'error',
-		'vue/no-undef-components': ['error', { ignorePatterns: ['pss(\\-\\w+)+'] }]
+		'vue/no-undef-components': ['error', { ignorePatterns: ['var(\\-\\w+)+'] }]
 	},
 	overrides: [
 		// webpack配置文件遵循commonjs规范,所以关闭禁止require规则

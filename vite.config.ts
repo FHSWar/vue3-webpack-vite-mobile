@@ -1,10 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { resolve } from 'path'
 
-import Components from '@nui/unplugin-vue-components/vite'
-import { PssResolver } from '@nui/unplugin-vue-components/resolvers'
 import vue from '@vitejs/plugin-vue'
-import AutoImport from 'unplugin-auto-import/vite'
 import { defineConfig } from 'vite'
 import svgLoader from 'vite-svg-loader'
 import vitePluginAutoRouter from './build/vite/vite-plugin-auto-router'
@@ -22,13 +19,7 @@ export default defineConfig({
 			pagesDir: 'modules'
 		}),
 		vitePluginEjsMpa(),
-		vue(),
-		Components({
-			resolvers: [PssResolver()]
-		}),
-		AutoImport({
-			resolvers: [PssResolver({ autoImport: true })]
-		})
+		vue()
 	],
 	define: {
 		'process.env': {
