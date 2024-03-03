@@ -1,17 +1,11 @@
-import { type RouteRecordRaw } from 'vue-router'
-import HomeView from './views/home-view.vue'
+import { RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
-  {
-    path: '/',
-    name: 'start-page',
-    redirect: 'home-view'
-  },
-  {
-    name: '',
-    path: '/home-view',
-    component: HomeView
-  }
+	{
+		path: '/home-view',
+		name: 'home-view',
+		component: () => import('@/modules/demo/views/home-view.vue')
+	}
 ]
 
 export default routes

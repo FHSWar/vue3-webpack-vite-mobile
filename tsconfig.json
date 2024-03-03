@@ -16,21 +16,11 @@
 		"noEmit": true,
 		"isolatedModules": true,
 		"baseUrl": ".",
-		"types": [
-			"node",
-			"webpack-env"
-		],
+		"types": ["node", "webpack-env"],
 		"paths": {
-			"@/*": [
-				"src/*"
-			]
+			"@/*": ["src/*"]
 		},
-		"lib": [
-			"esnext",
-			"dom",
-			"dom.iterable",
-			"scripthost"
-		]
+		"lib": ["esnext", "dom", "dom.iterable", "scripthost"]
 	},
 	"include": [
 		"src/**/*.ts",
@@ -41,7 +31,5 @@
 		"auto-imports.d.ts",
 		"components.d.ts"
 	],
-	"exclude": [
-		"node_modules"
-	]
+	"exclude": ["node_modules"]
 }
