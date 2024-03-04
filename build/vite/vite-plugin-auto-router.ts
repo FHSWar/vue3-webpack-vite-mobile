@@ -6,10 +6,14 @@
  * - handleHotUpdate 钩子: 用于处理文件热更新事件。当 Vue 文件被更新时，该钩子会被触发，从而重新生成路由配置文件，确保路由配置实时更新。
  * - 通过这种方式，可以自动化地管理 Vue 项目中的路由配置，极大地提升开发效率。
  */
-import { existsSync, readFileSync, writeFileSync } from 'fs'
+import { constants, promises } from 'fs'
 import { basename, dirname, join, posix, relative, resolve } from 'path'
 import { sync } from 'glob'
-import { type Plugin } from 'vite'
+import { Plugin } from 'vite'
+
+const { readFile, writeFile, access } = promises
+// F_OK 用于检查文件的存在性，而不关心访问权限的其他方面，如读写权限
+const { F_OK } = constants
 
 interface AutoRouterPluginOptions {
 	mode: 'spa' | 'mpa' // 新增模式字段，可选值为 'spa' 或 'mpa'
@@ -18,63 +22,47 @@ interface AutoRouterPluginOptions {
 
 // 路由发生变化才写入
 function writeIfChanged(routerPath: string, routerConfig: string) {
-	let currentConfig = ''
-	if (existsSync(routerPath)) {
-		currentConfig = readFileSync(routerPath, 'utf-8')
-	}
-
-	if (currentConfig !== routerConfig) {
-		try {
-			writeFileSync(routerPath, routerConfig, 'utf-8')
-		} catch (error) {
-			console.error(`写入配置文件错误: ${error}`)
-		}
-	}
+	access(routerPath, F_OK)
+		.then(() => readFile(routerPath, 'utf-8'))
+		.then((currentConfig) => {
+			if (currentConfig !== routerConfig) {
+				writeFile(routerPath, routerConfig, 'utf-8')
+			}
+		})
+		.catch((error) => {
+			if (error.code === 'ENOENT') {
+				// 文件不存在，直接写入
+				writeFile(routerPath, routerConfig, 'utf-8')
+			} else console.error(`写入配置文件错误: ${error}`)
+		})
 }
 
 // 生成路由文件
 function generateRoutes(viewsDir: string, routerPath: string) {
-	// 使用 glob.sync 匹配 views 目录下的所有 .vue 文件，包括子目录
-	const files = sync('**/*.vue', { cwd: viewsDir })
-
-	// 过滤文件列表，只包含根目录下的 Vue 文件和子目录中的 index.vue 文件
-	const filteredFiles = files.filter((file) => {
-		// 获取文件相对于 views 目录的路径
+	const filteredFiles = sync('**/*.vue', { cwd: viewsDir }).filter((file) => {
 		const relativePath = relative(viewsDir, join(viewsDir, file))
-		// 检查文件是否直接位于 views 目录下，或者是子目录中的 index.vue 文件
 		return dirname(relativePath) === '.' || basename(file) === 'index.vue'
 	})
 
-	// 映射文件路径为路由配置
 	const routes = filteredFiles.map((file) => {
 		const fileBaseName = basename(file, '.vue')
-		// 拼出键值对
 		const routeName =
 			fileBaseName === 'index' ? file.split('/')[0] : fileBaseName
 		const pathVal = `/${routeName !== 'index' ? routeName : ''}`
-		// posix能保证不同系统的路径都是`/`，不会出现windows里面的`\`
 		const componentPath = relative(
 			process.cwd(),
+			// 将所有反斜杠（\）转换为正斜杠（/），进一步确保路径的跨平台兼容性
 			posix.join(viewsDir, file).replace(/\\/g, '/')
+			// src还要考虑相对路径，不如`@`方便
 		).replace('src', '@')
-
-		// 用符合项目eslint规则的换行和缩进拼接起来
-		const routeConfig = `{\n\t\tpath: '${pathVal}',\n\t\tname: '${routeName}',\n\t\tcomponent: () => import('${componentPath}')\n\t}`
-
-		return routeConfig
+		return `{\n\t\tpath: '${pathVal}',\n\t\tname: '${routeName}',\n\t\tcomponent: () => import('${componentPath}')\n\t}`
 	})
 
 	const importStatement = `import { RouteRecordRaw } from 'vue-router'`
 	const routerArray = `const routes: RouteRecordRaw[] = [\n\t${routes.join(',\n\t')}\n]`
-	// 拼接生成路由配置文件内容
 	const routerConfig = `${importStatement}\n\n${routerArray}\n\nexport default routes\n`
 
-	// 写入路由配置到文件
-	try {
-		writeIfChanged(routerPath, routerConfig)
-	} catch (error) {
-		throw new Error(`写入配置文件错误: ${error}`)
-	}
+	writeIfChanged(routerPath, routerConfig)
 }
 
 function vitePluginAutoRouter(options: AutoRouterPluginOptions): Plugin {
